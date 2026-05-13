@@ -1,0 +1,20 @@
+[project]
+name = "marketing-roi-causal-impact"
+version = "0.1.0"
+description = "End-to-end data pipeline and analytics project focused on donor Lifetime Value (LTV) and causal impact analysis of marketing campaigns. Built with Python (Poetry), dbt, and DuckDB."
+authors = [
+    {name = "robson-lachat",email = "robson.neves@gmail.com"}
+]
+requires-python = ">=3.14"
+dependencies = [
+    "duckdb (>=1.5.2,<2.0.0)",
+    "pandas (>=3.0.2,<4.0.0)",
+    "matplotlib (>=3.10.9,<4.0.0)",
+    "statsmodels (>=0.14.6,<0.15.0)",
+    "pyarrow (>=24.0.0,<25.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

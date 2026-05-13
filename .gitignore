@@ -1,0 +1,32 @@
+# Python
+
+
+# Virtual Environments
+.venv/
+
+# IDEs
+.vscode/
+
+# Database
+database.duckdb
+*.duckdb
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Poetry
+poetry.lock
+
+# Outputs - keep folder but ignore contents
+outputs/*
+!outputs/.gitkeep
+
+# Docs - keep folder but ignore contents
+docs/*
+!docs/.gitkeep
+
+# Tests - keep folder but ignore contents
+tests/*
+!tests/.gitkeep
