@@ -7,55 +7,56 @@
 ![Linter](https://img.shields.io/badge/linter-ruff-orange.svg)
 ![OS](https://img.shields.io/badge/OS-WSL2--Ubuntu-linux.svg)
 
-Um pipeline de dados analítico focado no cálculo de ROI e impacto causal de campanhas de marketing. Este projeto demonstra práticas modernas de engenharia de dados, automação em Linux e modelagem estatística avançada utilizando DuckDB.
+An analytical data pipeline focused on calculating marketing campaign ROI and causal impact. This project demonstrates modern data engineering practices, Linux automation, and advanced statistical modeling using DuckDB.
 
 ## 🎯 Project Goal
-Prover uma infraestrutura resiliente para isolar o efeito real de campanhas de marketing sobre o volume de doações, utilizando modelos de séries temporais (SARIMAX) para criar cenários contrafactuais e garantir cálculos de ROI precisos.
+Provide a resilient infrastructure to isolate the true effect of marketing campaigns on donation volume by using time series models (SARIMAX) to build counterfactual scenarios and ensure precise ROI calculations.
 
 ## 🚀 Technologies & Tools
 - **Language:** Python 3.13+
-- **Database Engine:** [DuckDB](https://duckdb.org/) (Processamento OLAP in-process de alta performance)
-- **Package Manager:** [Poetry](https://python-poetry.org/) (Ambientes isolados e gestão de dependências)
-- **QA & Style:** [Ruff](https://github.com/astral-sh/ruff) (Linter e formatter ultra-rápido)
-- **Analytics:** Statsmodels (SARIMAX para inferência causal)
-- **Automation:** GNU Make (Padronização de comandos de terminal)
+- **Database Engine:** [DuckDB](https://duckdb.org/) (high-performance in-process OLAP processing)
+- **Package Manager:** [Poetry](https://python-poetry.org/) (isolated environments and dependency management)
+- **QA & Style:** [Ruff](https://github.com/astral-sh/ruff) (ultra-fast linter and formatter)
+- **Analytics:** Statsmodels (SARIMAX for causal inference)
+- **Automation:** GNU Make (standardized terminal commands)
 
 ## 📦 Environment Setup
 
-Este projeto é otimizado para ambientes **Linux/WSL2**.
+This project is optimized for **Linux/WSL2** environments.
 
-1.  **Instalar o Poetry** (caso não possua):
+1.  **Install Poetry** (if not already installed):
     ```bash
     curl -sSL https://install.python-poetry.org | python3 -
     ```
 
-2.  **Instalar dependências do projeto**:
+2.  **Install project dependencies**:
     ```bash
     make install
     ```
 
 ## 🎮 How to Use (Makefile)
 
-Para agilizar o desenvolvimento e a execução do pipeline, um `Makefile` é fornecido com os seguintes alvos:
+To streamline development and pipeline execution, a `Makefile` is provided with the following targets:
 
-| Command        | Description                                                          |
-| :------------- | :------------------------------------------------------------------- |
-| `make install` | Instala dependências via Poetry.                                     |
-| `make load`    | Executa a carga e limpeza dos dados (SQL -> DuckDB).                 |
-| `make analyze` | Roda a análise de LTV e gera o gráfico de impacto causal.            |
-| `make lint`    | Verifica erros de lógica e estilo usando Ruff.                       |
-| `make check`   | **O comando definitivo:** Executa lint, load e analyze em sequência. |
-| `make clean`   | Remove o banco de dados e arquivos temporários de saída.             |
+| Command        | Description                                                  |
+| :------------- | :----------------------------------------------------------- |
+| `make install` | Installs dependencies via Poetry.                            |
+| `make load`    | Runs the data load pipeline (SQL -> DuckDB).                 |
+| `make analyze` | Runs the LTV analysis and generates the causal impact chart. |
+| `make lint`    | Checks logic and style issues using Ruff.                    |
+| `make format`  | Automatically formats code with Ruff.                        |
+| `make check`   | Runs FORMAT, LOAD and ANALYZE in sequence.                   |
+| `make clean`   | Removes the database and temporary output files.             |
 
 ## 🧪 Data Quality Strategy
-O projeto foca na integridade dos dados através de uma filosofia de **Schema-First**:
-- **Data Integrity:** Uso de `TRY_CAST` no DuckDB para converter ruídos (`'None'`, `'NP'`, `'Error'`) em `NULL` sem quebrar o pipeline.
-- **Statistical Precision:** Cálculo de LTV Médio ($1,482.77) e validação do uplift da campanha (+4,578 doações).
-- **Validation:** Verificação de volume de registros pós-ingestão para garantir a consistência do processo de carga.
-*Nota: A cobertura total de testes unitários está planeada para futuras iterações.*
+The project focuses on data integrity through a **Schema-First** philosophy:
+- **Data Integrity:** Uses `TRY_CAST` in DuckDB to convert noisy values (`'None'`, `'NP'`, `'Error'`) into `NULL` without breaking the pipeline.
+- **Statistical Precision:** Calculates average LTV ($1,482.77) and validates campaign uplift (+4,578 donations).
+- **Validation:** Verifies record counts after ingestion to ensure consistency in the loading process.
+*Note: Full unit test coverage is planned for future iterations.*
 
 ## 🧠 Architecture Notes (WSL/DuckDB)
-O projeto implementa uma **Modern Data Stack Lite**. A lógica de transformação é desacoplada do código Python e reside em arquivos `.sql` modulares dentro da pasta `/models`. Isso permite que o DuckDB atue como uma camada de modelagem eficiente, enquanto o Python foca na orquestração e na ciência de dados aplicada ao negócio.
+The project implements a **Modern Data Stack Lite**. Transformation logic is decoupled from Python code and lives in modular `.sql` files inside the `/models` folder. This allows DuckDB to act as an efficient modeling layer while Python focuses on orchestration and business-focused data science.
 
 ---
 **Developer:** Robson Rodrigues Neves Aguiar Lachat
